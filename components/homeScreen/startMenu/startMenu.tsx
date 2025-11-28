@@ -3,7 +3,7 @@ import Image from 'next/image';
 // public images
 import Logo from '@/public/loadingscreenxplogo.png';
 import profile from '@/public/profile.jpg'
-
+import QuickStartGuideIcon from '@/public/QuickStartGuideIcon.ico'
 
 // icons
 import { FaInternetExplorer } from "react-icons/fa";
@@ -17,28 +17,15 @@ import { GrLinkedin } from "react-icons/gr";
 
 //shadcn components
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, } from "@/components/ui/navigation-menu"
-import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/popover"
 import { Label } from '@/components/ui/label';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 //zustand store
 import { useApplicationStore } from '@/stores/application';
 
 // applications components
 import Projects from '../applications/projects';
+import QuickStartGuide from '@/components/homeScreen/applications/QuickStartGuide'
 const startMenu = () => {
     const addWindowItem = useApplicationStore((state) => state.addWindowItem)
     return (
@@ -64,8 +51,8 @@ const startMenu = () => {
 
                                     <div className='flex flex-col gap-1 pb-2 border-b border-black/10'>
                                         <DropdownMenuItem>
-                                            <div onClick={() => addWindowItem('Internet', <FaInternetExplorer className='text-[#3397e8] text-[15px]' />, <Projects />)} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                                <FaInternetExplorer className='text-[#3397e8] text-[25px]' />
+                                            <div onClick={() => addWindowItem('Internet', <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[15px]' />, <Projects />)} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
+                                                <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[30px]' />
                                                 <div>
                                                     <Label className='text-[13px] leading-none '>Internet</Label>
                                                     <Label className=' font-thin opacity-50 text-[13px] leading-none '>Internet Explorer</Label>
@@ -85,8 +72,17 @@ const startMenu = () => {
                                     </div>
 
                                     <DropdownMenuItem>
-                                        <div onClick={() => addWindowItem('Projects', <FaFolderOpen className='text-[#f5d78c] text-[15px]' />, <Projects />)} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                            <FaFolderOpen className='text-[#f5d78c] text-[25px]' />
+                                        <div onClick={() => addWindowItem('Quick Start Guide', <Image src={QuickStartGuideIcon} alt='' width={20} height={20} className='w-[20px]' />, <QuickStartGuide />)} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
+                                            <Image src={QuickStartGuideIcon} alt='' width={20} height={20} className='w-[30px]' />
+                                            <div>
+                                                <Label className='text-[13px] leading-none font-normal'>Quick Start Guide</Label>
+                                            </div>
+                                        </div>
+                                    </DropdownMenuItem>
+
+                                    <DropdownMenuItem>
+                                        <div onClick={() => addWindowItem('Projects', <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[15px]' />, <Projects />)} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
+                                            <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[30px]' />
                                             <div>
                                                 <Label className='text-[13px] leading-none font-normal'>Projects</Label>
                                             </div>

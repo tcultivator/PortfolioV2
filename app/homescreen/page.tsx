@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
+import { useEffect } from 'react'
 // start menu components
 import StartMenu from '@/components/homeScreen/startMenu/startMenu'
 
@@ -10,8 +11,6 @@ import { Rnd } from 'react-rnd'
 import { Label } from '@/components/ui/label'
 
 // icons
-import { FaFolderOpen } from "react-icons/fa6";
-import { FaTimes } from "react-icons/fa";
 import { FaRegWindowMaximize } from "react-icons/fa";
 import { FaWindowMinimize } from "react-icons/fa";
 import { useApplicationStore } from '@/stores/application'
@@ -19,6 +18,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { LiaTimesSolid } from "react-icons/lia";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 
 
@@ -34,12 +34,15 @@ import folderLayoutIcon from '@/public/folderLayoutIcon.ico'
 const topMenuItems = ["File", "Edit", "View", "Favourites", "Tools", "Help"];
 
 
+
 const HomeScreen = () => {
 
     const windowItem = useApplicationStore((state) => state.windowItem)
     const activeId = useApplicationStore((state) => state.activeId)
     const setActiveId = useApplicationStore((state) => state.setActiveId)
     const closeWindowItem = useApplicationStore((state) => state.closeWindowItem)
+
+
     return (
         <div className="flex flex-col items-center w-screen h-screen text-white relative bg-cover bg-center overflow-hidden"
             style={{ backgroundImage: "url('/xpbg.jpg')" }}>
@@ -64,8 +67,8 @@ const HomeScreen = () => {
                         topLeft: true,
                     }}
                     default={{
-                        x: window.innerWidth / 2 - 320,
-                        y: window.innerHeight / 2 - 320,
+                        x: data.startX,
+                        y: data.startY,
                         width: 320,
                         height: 120,
                     }}
@@ -78,7 +81,7 @@ const HomeScreen = () => {
                                 {data.icon}
                                 <Label>{data.title}</Label>
                             </div>
-                            <div className='flex items-center gap-1'>
+                            <div className={`${activeId === data.id ? 'opacity-100' : 'opacity-70'} flex items-center gap-1`}>
                                 <button className='bg-[#235ddb] p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
                                     <FaWindowMinimize className='p-[2px] text-[17px]' />
                                 </button>
@@ -141,10 +144,24 @@ const HomeScreen = () => {
                             </div>
 
                         </div>
+                        <div className='bg-[#edebd8]  flex items-center gap-1'>
+                            <Label className='font-thin text-black/50 text-[11px] p-[2px] px-2'>Address</Label>
+                            <div className='bg-white w-full h-full  border border-black/20 flex justify-between items-center pl-1'>
+                                <div className='flex items-center'>
+                                    <Label className='w-[15px]'>{data.icon}</Label>
+                                    <Label className='font-thin text-black/60 text-[11px] p-[2px] px-2'>{data.title}</Label>
+                                </div>
+                                <RiArrowDownSLine className='text-black bg-[#acc8fc] h-full px-1 text-[22px] aspect-square border border-black/10' />
+                            </div>
+                            <div className='flex items-center gap-1 p-[2px] pr-2'>
+                                <FaArrowRight className=' bg-[#2eb32e] shadow-[inset_0_2px_5px_rgba(255,255,255,0.5),inset_0_-2px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] text-white p-[2px] text-[18px] rounded-[2px]' />
+                                <Label className='font-thin text-black text-[11px]'>Go</Label>
+                            </div>
+                        </div>
 
                         {/* Content */}
-                        <div className="bg-white h-full ">
-
+                        <div className="bg-[#6374d6] h-full flex   ">
+                            {data.content}
                         </div>
                     </div>
                 </Rnd>

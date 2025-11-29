@@ -1,0 +1,29 @@
+//zustand store
+import { useApplicationStore } from '@/stores/application';
+
+
+import Image from 'next/image';
+
+
+// applications components
+import Projects from '@/components/homeScreen/applications/projects';
+import QuickStartGuide from '@/components/homeScreen/applications/QuickStartGuide'
+import InternetExplorer from '@/components/homeScreen/applications/InternetExplorer';
+
+
+export function openInternetExplorer(url: string) {
+    useApplicationStore.getState().addWindowItem('Internet', <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[15px]' />, <InternetExplorer url={url} />, 1400, 800)
+
+}
+
+export function openQuickStart() {
+    useApplicationStore.getState().addWindowItem('Quick Start Guide', <Image src="/QuickStartGuideIcon.ico" alt='' width={20} height={20} className='w-[15px]' />, <QuickStartGuide />, 800, 500)
+}
+
+export function openMyWorks() {
+    useApplicationStore.getState().addWindowItem('My Work', <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[15px]' />, <Projects />, 800, 500)
+}
+
+export function openEmail() {
+    useApplicationStore.getState().addWindowItem('E-Mail', <Image src="/email.webp" alt='' width={20} height={20} className='w-[15px]' />, <Projects />, 800, 500)
+}

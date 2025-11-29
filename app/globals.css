@@ -138,3 +138,108 @@
 .xp-animate {
   animation: xpSlide 1.5s linear infinite;
 }
+
+
+
+button#QS:focus #QSLabel {
+  background-color: blue;
+}
+
+button#QS:focus #QSImage {
+  opacity: .5;
+}
+
+
+
+
+button#IE:focus #IELabel {
+  background-color: blue;
+}
+
+
+button#IE:focus #IEImage {
+  opacity: .5;
+}
+
+
+
+button#EM:focus #EMLabel {
+  background-color: blue;
+}
+
+
+button#EM:focus #EMImage {
+  opacity: .5;
+}
+
+
+
+button#MW:focus #MWLabel {
+  background-color: blue;
+}
+
+button#MW:focus #MWImage {
+  opacity: .5;
+}
+
+
+
+
+button#p1:focus #p1label {
+  background-color: blue;
+  width: 100%;
+  text-align: center;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+button#p1:focus #p1image {
+  opacity: .6;
+}
+
+
+button#p2:focus #p2label {
+  background-color: blue;
+  width: 100%;
+  text-align: center;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+button#p2:focus #p2image {
+  opacity: .6;
+}
+
+
+button#p3:focus #p3label {
+  background-color: blue;
+  width: 100%;
+  text-align: center;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+button#p3:focus #p3image {
+  opacity: .6;
+}
+
+
+button#p4:focus #p4label {
+  background-color: blue;
+  width: 100%;
+  text-align: center;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+button#p4:focus #p4image {
+  opacity: .6;
+}

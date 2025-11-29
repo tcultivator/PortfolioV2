@@ -3,25 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 // shadcn components
 import { Label } from '@/components/ui/label'
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
 
 // icons 
 import { RiArrowUpDoubleFill } from "react-icons/ri";
 import { FaSquareJs } from "react-icons/fa6";
 import { RiNextjsFill } from "react-icons/ri";
 
-//zustand store
-import { useApplicationStore } from '@/stores/application';
 
-// applications components
-import InternetExplorer from '../applications/InternetExplorer';
+//reusable components that open application
+import { openInternetExplorer, openQuickStart, openMyWorks, openEmail } from '@/utils/OpenApplication'
 
 const Projects = () => {
-    const addWindowItem = useApplicationStore((state) => state.addWindowItem)
     return (
         <div className='flex gap-4 text-black bg-white w-full '>
             <div className='max-w-[180px] min-w-[180px] bg-gradient-to-t from-[#6374d6] to-[#79a3e8] flex flex-col gap-2 p-2'>
@@ -72,12 +64,8 @@ const Projects = () => {
                 </div>
             </div>
             <div className="w-full p-2 grid grid-cols-3 gap-2 auto-rows-fr">
-                <div onClick={
-                    () =>
-                        addWindowItem('Internet',
-                            <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[15px]' />,
-                            <InternetExplorer url={'https://overclockedx-client.vercel.app'} />, 1200, 700)}
-                    className="flex w-full h-max p-1 justify-start">
+                <button onDoubleClick={() => openInternetExplorer('https://overclockedx-client.vercel.app')}
+                    className="flex w-max h-max p-1 justify-start cursor-pointer " id='p1'>
                     <div className="flex flex-col gap-1 items-center justify-start">
                         <div className="aspect-video flex items-center justify-center">
                             <Image
@@ -86,35 +74,36 @@ const Projects = () => {
                                 width={150}
                                 height={150}
                                 className="border border-black/50"
+                                id='p1image'
                             />
                         </div>
-                        <Label className="font-light text-[13px]">OverClockedX-Client</Label>
+                        <Label id='p1label' className="font-light text-[13px]">OverClockedX-Client</Label>
                     </div>
-                </div>
-                <div className='flex  w-full h-max p-1 justify-start'>
+                </button>
+                <button id='p2' onDoubleClick={() => openInternetExplorer('https://overclockedx-admin.vercel.app')} className='flex  w-max h-max p-1 justify-start cursor-pointer '>
                     <div className='flex flex-col gap-1 items-center justify-start'>
                         <div className='aspect-video flex items-center justify-center'>
-                            <Image src="/myWorks/overclockedx-admin.webp" alt='OverClockedX-Admin-Image' width={150} height={150} className='border border-black/50' />
+                            <Image id='p2image' src="/myWorks/overclockedx-admin.webp" alt='OverClockedX-Admin-Image' width={150} height={150} className='border border-black/50' />
                         </div>
-                        <Label className='font-light text-[13px]'>OverClockedX-Admin</Label>
+                        <Label id='p2label' className='font-light text-[13px]'>OverClockedX-Admin</Label>
                     </div>
-                </div>
-                <div className='flex  w-full h-max p-1'>
+                </button>
+                <button id='p3' onDoubleClick={() => openInternetExplorer('https://tcultivator.github.io/instagramClone-DevelopmentPhaseV2')} className='flex  w-max h-max p-1 cursor-pointer '>
                     <div className='flex flex-col gap-1 items-center'>
                         <div className='aspect-video flex items-center justify-center'>
-                            <Image src="/myWorks/instagram-clone.webp" alt='Instagram-clone-Image' width={150} height={150} className='border border-black/50' />
+                            <Image id='p3image' src="/myWorks/instagram-clone.webp" alt='Instagram-clone-Image' width={150} height={150} className='border border-black/50' />
                         </div>
-                        <Label className='font-light text-[13px]'>Instagram Clone</Label>
+                        <Label id='p3label' className='font-light text-[13px]'>Instagram Clone</Label>
                     </div>
-                </div>
-                <div className='flex  w-full h-max p-1'>
+                </button>
+                <button id='p4' onDoubleClick={() => openInternetExplorer('https://tcultivator.github.io/myPortfolio/')} className='flex  w-max h-max p-1 cursor-pointer '>
                     <div className='flex flex-col gap-1 items-center'>
                         <div className='aspect-video flex items-center justify-center'>
-                            <Image src="/myWorks/portfolio-v1.webp" alt='Portfolio-V2-Image' width={150} height={150} className='border border-black/50' />
+                            <Image id='p4image' src="/myWorks/portfolio-v1.webp" alt='Portfolio-V1-Image' width={150} height={150} className='border border-black/50' />
                         </div>
-                        <Label className='font-light text-[13px]'>Portfolio V2</Label>
+                        <Label id='p4label' className='font-light text-[13px]'>Portfolio V1</Label>
                     </div>
-                </div>
+                </button>
 
                 {/* Repeat other items in the same structure */}
             </div>

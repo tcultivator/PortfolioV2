@@ -70,11 +70,11 @@ const iframeContent = `
   </head>
   <body>
     <Image 
-    src="/google.png" // put official PNG or SVG in public folder
+    src="/google.png" 
     alt="Google Logo"
-    width={102} 
-    height={52} 
-    style={{ width: '60%', height: 'auto' }} 
+    width={50} 
+    height={50} 
+    style={{ width: '200px', height: '200px' }} 
 />
 
     <form onsubmit="event.preventDefault(); alert('Search submitted');">

@@ -31,21 +31,17 @@ export const useApplicationStore = create<Applications>((set) => ({
 
     }],
     addWindowItem: (title, icon, content, defaultWidth, defaultHeight) => {
-        const centerX = window.innerWidth / 2 - 320;
-        const centerY = window.innerHeight / 2 - 320;
+        // Calculate perfect center
+        let startX = window.innerWidth / 2 - defaultWidth / 2;
+        let startY = window.innerHeight / 2 - defaultHeight / 2;
 
-        // Random offset range
-        const offsetRange = 10; // how far it can move from the center
-
-        const randomOffsetX = Math.floor(Math.random() * offsetRange * 2) - offsetRange;
-        const randomOffsetY = Math.floor(Math.random() * offsetRange * 2) - offsetRange;
-
-        let startX = centerX + randomOffsetX;
-        let startY = centerY + randomOffsetY;
-
-        // keep window inside screen bounds
+        // Keep window inside screen bounds
         startX = Math.max(0, Math.min(startX, window.innerWidth - defaultWidth));
         startY = Math.max(0, Math.min(startY, window.innerHeight - defaultHeight));
+
+        const offset = 20;
+        startX += Math.floor(Math.random() * offset);
+        startY += Math.floor(Math.random() * offset);
 
         const id = crypto.randomUUID();
 

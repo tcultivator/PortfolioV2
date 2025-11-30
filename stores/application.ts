@@ -10,13 +10,19 @@ type WindowItemType = {
     startY: number;
     defaultWidth: number;
     defaultHeight: number;
+    fullScreen: boolean;
+    display: boolean;
 }
 type Applications = {
     windowItem: WindowItemType[],
     addWindowItem: (title: string, icon: React.ReactNode, content: React.ReactNode, defaultWidth: number, defaultHeight: number) => void,
     activeId: string | null,
     setActiveId: (id: string) => void,
-    closeWindowItem: (id: string) => void
+    closeWindowItem: (id: string) => void,
+    maximizeWindow: (id: string) => void,
+    updateWindow: (id: string, data: Partial<WindowItemType>) => void;
+    minimizeWindow: (id: string) => void,
+    cancelMinimize: (id: string) => void,
 }
 export const useApplicationStore = create<Applications>((set) => ({
     windowItem: [{
@@ -27,7 +33,9 @@ export const useApplicationStore = create<Applications>((set) => ({
         startX: 620,
         startY: 220,
         defaultWidth: 800,
-        defaultHeight: 500
+        defaultHeight: 500,
+        fullScreen: false,
+        display: true,
 
     }],
     addWindowItem: (title, icon, content, defaultWidth, defaultHeight) => {
@@ -57,6 +65,8 @@ export const useApplicationStore = create<Applications>((set) => ({
                     startY,
                     defaultWidth,
                     defaultHeight,
+                    fullScreen: false,
+                    display: true,
                 },
             ],
             activeId: id
@@ -74,6 +84,72 @@ export const useApplicationStore = create<Applications>((set) => ({
         set((state) => ({
             windowItem: state.windowItem.filter(item => item.id != id)
         }))
+    },
+    maximizeWindow: (id) => {
+        const selectedWindow = useApplicationStore.getState().windowItem.filter(item => item.id == id)
+        const prevStartX = selectedWindow[0].startX
+        const prevStartY = selectedWindow[0].startY
+
+        console.log(prevStartX)
+        console.log(prevStartY)
+
+        const currentWindowItems = useApplicationStore.getState().windowItem
+        const MaximizeSelectedWindow = currentWindowItems.map(item => {
+            if (item.id == id) {
+                return { ...item, fullScreen: !item.fullScreen }
+            }
+            return item
+        })
+
+
+        set({
+            windowItem: MaximizeSelectedWindow
+        })
+    },
+
+
+
+
+
+
+
+
+
+
+    updateWindow: (id, data) => {
+        console.log('gumana ung update Window')
+        console.log(data)
+        set((state) => ({
+            windowItem: state.windowItem.map((item) =>
+                item.id === id ? { ...item, ...data } : item
+            ),
+        }))
+    },
+
+
+
+
+
+
+
+
+    minimizeWindow: (id) => {
+        set((state) => ({
+            windowItem: state.windowItem.map((item) =>
+                item.id === id ? { ...item, display: false } : item
+            ),
+            activeId: useApplicationStore.getState().windowItem[useApplicationStore.getState().windowItem.length - 1].id
+        }))
+        console.log(useApplicationStore.getState().windowItem)
+    },
+    cancelMinimize: (id) => {
+        set((state) => ({
+            windowItem: state.windowItem.map((item) =>
+                item.id === id ? { ...item, display: true } : item
+            ),
+            activeId: id
+        }))
+        console.log(useApplicationStore.getState().windowItem)
     }
 
 }))

@@ -95,36 +95,36 @@ const iframeContent = `
 `;
 
 export default function IframeGoogleReplica({ url }: { url: string }) {
-    const iframeRef = useRef<HTMLIFrameElement>(null);
-    
-    useEffect(() => {
-        if (url == 'https://www.google.com/') {
-            if (iframeRef.current) {
-                const doc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
-                if (doc) {
-                    doc.open();
-                    doc.write(iframeContent);
-                    doc.close();
-                }
-            }
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (url == 'https://www.google.com/') {
+      if (iframeRef.current) {
+        const doc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
+        if (doc) {
+          doc.open();
+          doc.write(iframeContent);
+          doc.close();
         }
+      }
+    }
 
-    }, []);
+  }, []);
 
-    return (
-        <div className='flex flex-col w-full'>
-            <XPExplorerBar
-                title={url}
-                icon={<Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[15px]' />}
-            />
-            <iframe
-                src={`${url && url}`}
-                ref={iframeRef}
-                title="Google Replica"
-                style={{ width: '100%', height: '100%', border: 'none' }}
-                sandbox="allow-scripts allow-same-origin"
-            />
-        </div>
+  return (
+    <div className='flex flex-col w-full'>
+      <XPExplorerBar
+        title={url}
+        icon={<Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[15px] select-none' draggable={false} />}
+      />
+      <iframe
+        src={`${url && url}`}
+        ref={iframeRef}
+        title="Google Replica"
+        style={{ width: '100%', height: '100%', border: 'none' }}
+        sandbox="allow-scripts allow-same-origin"
+      />
+    </div>
 
-    );
+  );
 }

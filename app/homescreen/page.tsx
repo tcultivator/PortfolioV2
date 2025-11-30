@@ -27,25 +27,31 @@ const HomeScreen = () => {
     const activeId = useApplicationStore((state) => state.activeId)
     const setActiveId = useApplicationStore((state) => state.setActiveId)
     const closeWindowItem = useApplicationStore((state) => state.closeWindowItem)
+    const maximizeWindow = useApplicationStore((state) => state.maximizeWindow)
+    const updateWindow = useApplicationStore((state) => state.updateWindow)
+    const minimizeWindow = useApplicationStore((state) => state.minimizeWindow)
+    const cancelMinimize = useApplicationStore((state) => state.cancelMinimize)
 
     return (
-        <div className="flex flex-col  w-screen h-screen text-white relative bg-cover bg-center overflow-hidden"
-            style={{ backgroundImage: "url('/xpbg.jpg')" }}>
+        <div className="flex flex-col  w-screen h-screen text-white relative bg-cover bg-center overflow-hidden select-none "
+            style={{ backgroundImage: "url('/xpbg.jpg')" }}
+
+        >
             <div className='p-1  h-full w-max flex flex-col gap-10 items-center justify-start px-3 py-10'>
                 <button id='QS' onDoubleClick={openQuickStart} className='flex flex-col items-center gap-1 justify-center aspect-square w-[70px] cursor-pointer  ' >
-                    <Image id='QSImage' src="/QuickStartGuideIcon.ico" alt='' width={20} height={20} className='w-[35px] ' />
+                    <Image id='QSImage' src="/QuickStartGuideIcon.ico" alt='' width={20} height={20} className='w-[35px] bg-clip-text select-none' draggable={false} />
                     <Label id='QSLabel' className='font-light break-words text-[12px] leading-none text-center  p-1 cursor-pointer'>Quick Start</Label>
                 </button>
                 <button id='IE' onDoubleClick={() => openInternetExplorer('https://www.google.com/')} className='flex flex-col items-center gap-1 justify-center aspect-square w-[70px] cursor-pointer '>
-                    <Image id='IEImage' src="/internetIcon.ico" alt='' width={20} height={20} className='w-[35px]' />
+                    <Image id='IEImage' src="/internetIcon.ico" alt='' width={20} height={20} className='w-[35px] bg-clip-text select-none' draggable={false} />
                     <Label id='IELabel' className='font-light break-words text-[12px] leading-none text-center p-1 cursor-pointer'>Internet Explorer</Label>
                 </button>
                 <button id='EM' onDoubleClick={openEmail} className='flex flex-col items-center gap-1 justify-center aspect-square w-[70px] cursor-pointer '>
-                    <Image id='EMImage' src="/email.webp" alt='' width={20} height={20} className='w-[35px]' />
+                    <Image id='EMImage' src="/email.webp" alt='' width={20} height={20} className='w-[35px] bg-clip-text select-none' draggable={false} />
                     <Label id='EMLabel' className='font-light break-words text-[12px] leading-none text-center p-1 cursor-pointer'>E-mail</Label>
                 </button>
                 <button id='MW' onDoubleClick={openMyWorks} className='flex flex-col items-center gap-1 justify-center aspect-square w-[70px] cursor-pointer'>
-                    <Image id='MWImage' src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[35px]' />
+                    <Image id='MWImage' src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[35px] bg-clip-text select-none' draggable={false} />
                     <Label id='MWLabel' className='font-light break-words text-[12px] leading-none text-center p-1 cursor-pointer'>My Works</Label>
                 </button>
 
@@ -57,11 +63,13 @@ const HomeScreen = () => {
                 <Rnd
 
                     onMouseDown={() => setActiveId(data.id)}
-                    className={activeId === data.id ? "z-40" : "z-10"}
+                    className={activeId === data.id ? `z-40 ${data.display ? 'opacity-100' : 'opacity-0'}` : `z-10 ${data.display ? 'opacity-100' : 'opacity-0'}`}
                     key={data.id}
                     bounds="parent"
                     minWidth={800}
                     minHeight={500}
+                    position={{ x: data.fullScreen ? 0 : data.startX, y: data.fullScreen ? 0 : data.startY }}
+                    size={{ height: data.fullScreen ? window.innerHeight : data.defaultHeight, width: data.fullScreen ? window.innerWidth : data.defaultWidth }}
                     dragHandleClassName="drag-handle"
                     enableResizing={{
                         top: true,
@@ -73,27 +81,35 @@ const HomeScreen = () => {
                         bottomLeft: true,
                         topLeft: true,
                     }}
-                    default={{
-                        x: data.startX,
-                        y: data.startY,
-                        width: data.defaultWidth,
-                        height: data.defaultHeight,
+                    onDragStop={(e, d) => {
+                        updateWindow(data.id, {
+                            startX: d.x,
+                            startY: d.y
+                        });
                     }}
+
+                    onResizeStop={(e, dir, ref, delta, pos) => {
+                        updateWindow(data.id, {
+                            defaultWidth: parseFloat(ref.style.width),
+                            defaultHeight: parseFloat(ref.style.height),
+                        });
+                    }}
+
                 >
                     <div className={`w-full h-full ${activeId === data.id ? 'bg-[#235ddb]' : 'bg-[#3d82f2]'} rounded-t-[10px] p-1 flex flex-col shadow-[inset_0_2px_5px_rgba(103,169,246,0.95),inset_0_-2px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)]`}>
                         {/* Drag handle */}
-                        <div className="drag-handle w-full h-6 cursor-move rounded-t-[5px] pb-1 px-1 flex justify-between items-center">
-                            <div className='flex items-center gap-1'>
+                        <div className=" w-full h-6 cursor-move rounded-t-[5px] pb-1 px-1 flex justify-between items-center">
+                            <div className='flex items-center gap-1 w-full drag-handle'>
                                 {/* <FaFolderOpen className='text-[#f5d78c] text-[15px]' /> */}
                                 {data.icon}
                                 <Label>{data.title}</Label>
                             </div>
                             <div className={`${activeId === data.id ? 'opacity-100' : 'opacity-70'} flex items-center gap-1`}>
-                                <button className='bg-[#235ddb] p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
+                                <button onClick={() => minimizeWindow(data.id)} className='bg-[#235ddb] p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
                                     <FaWindowMinimize className='p-[2px] text-[17px]' />
                                 </button>
 
-                                <button className='bg-[#235ddb] p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
+                                <button onClick={() => maximizeWindow(data.id)} className='bg-[#235ddb] p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
                                     <FaRegWindowMaximize className='p-[2px] text-[17px]' />
                                 </button>
 
@@ -118,12 +134,14 @@ const HomeScreen = () => {
                 </Rnd>
             ))}
 
+
+
             <div className='bg-[#235ddb] z-50 w-full h-8 max-h-8 absolute bottom-0 gap-1 flex items-center shadow-[inset_0_2px_5px_rgba(103,169,246,0.95),inset_0_-2px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)]'>
                 <StartMenu />
                 <div className='flex items-center'>
                     {
                         windowItem.map((data) => (
-                            <div onClick={() => setActiveId(data.id)} key={data.id} className='max-h-8 h-8 w-[150px] py-[3px]'>
+                            <div onClick={() => cancelMinimize(data.id)} key={data.id} className='max-h-8 h-8 w-[150px] py-[3px]'>
                                 <div className={`px-3 flex gap-1 items-center ${activeId === data.id ? 'bg-[#235ddb]' : 'bg-[#3d82f2]'}  rounded-[3px] w-full h-full border border-black/20  hover:brightness-110 cursor-pointer`}>
                                     <Label className='text-[12px]'>{data.icon}</Label>
                                     <Label className='font-thin text-[12px]'>{data.title}</Label>

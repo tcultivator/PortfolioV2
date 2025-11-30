@@ -46,10 +46,10 @@ const QuickStartGuide = () => {
                 {/* Projects */}
                 <QuickStartItem
                     label="My Work"
-                    icon={<Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[50px]' />}
+                    icon={<Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[50px] select-none' draggable={false} />}
                     onClick={() => addWindowItem(
                         "My Work",
-                        <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[15px]' />,
+                        <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[15px] select-none' draggable={false} />,
                         <Projects />, 800, 500
                     )}
                 />

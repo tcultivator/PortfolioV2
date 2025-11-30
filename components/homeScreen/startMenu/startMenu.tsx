@@ -23,7 +23,7 @@ const startMenu = () => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild className='outline-none'>
                 <button className='flex items-center bg-gradient-to-b from-[#2eb32e] to-[#038200] max-h-8.5 px-2 py-2 pr-5 gap-1 rounded-tr-[6px] rounded-br-[10px] cursor-pointer inset-shadow-sm inset-shadow-black/50 shadow-[inset_0_10px_25px_rgba(1,107,1),inset_0_-2px_12px_rgba(1,107,1),0_2px_4px_rgba(1,107,1)] hover:brightness-110'>
-                    <Image src="/loadingscreenxplogo.png" alt='' width={20} height={20} className='w-[20px] mt-[3px]' />
+                    <Image src="/loadingscreenxplogo.png" alt='' width={20} height={20} className='w-[20px] mt-[3px] select-none ' draggable={false} />
                     <Label className='text-[18px] font-bold text-white/85 italic cursor-pointer'>start</Label>
                 </button>
             </DropdownMenuTrigger>
@@ -31,7 +31,7 @@ const startMenu = () => {
                 <div className="grid gap-0 p-1">
                     <div className='flex items-center gap-1 p-1'>
                         <div className='p-[3px] w-max rounded-[7px] bg-[#587FDB] inset-shadow-sm inset-shadow-white '>
-                            <Image src="/profile.jpg" alt='' width={50} height={50} className='rounded' />
+                            <Image src="/profile.jpg" alt='' width={50} height={50} className='rounded select-none ' draggable={false} />
                         </div>
 
                     </div>
@@ -42,7 +42,7 @@ const startMenu = () => {
                                 <div className='flex flex-col gap-1 pb-2 border-b border-black/10'>
                                     <DropdownMenuItem>
                                         <div onClick={() => openInternetExplorer('https://www.google.com/')} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                            <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[30px]' />
+                                            <Image src="/internetIcon.ico" alt='' width={20} height={20} className='w-[30px] select-none ' draggable={false}/>
                                             <div>
                                                 <Label className='text-[13px] leading-none '>Internet</Label>
                                                 <Label className=' font-thin opacity-50 text-[13px] leading-none '>Internet Explorer</Label>
@@ -52,7 +52,7 @@ const startMenu = () => {
 
                                     <DropdownMenuItem>
                                         <div onClick={openEmail} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                            <Image src="/email.webp" alt='' width={20} height={20} className='w-[30px]' />
+                                            <Image src="/email.webp" alt='' width={20} height={20} className='w-[30px] select-none ' draggable={false} />
                                             <div>
                                                 <Label className='text-[13px] leading-none'>E-mail</Label>
                                                 <Label className=' font-thin opacity-50 text-[13px] leading-none'>Outlook Express</Label>
@@ -63,7 +63,7 @@ const startMenu = () => {
 
                                 <DropdownMenuItem>
                                     <div onClick={openQuickStart} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                        <Image src="/QuickStartGuideIcon.ico" alt='' width={20} height={20} className='w-[30px]' />
+                                        <Image src="/QuickStartGuideIcon.ico" alt='' width={20} height={20} className='w-[30px] select-none ' draggable={false}/>
                                         <div>
                                             <Label className='text-[13px] leading-none font-normal'>Quick Start Guide</Label>
                                         </div>
@@ -72,7 +72,7 @@ const startMenu = () => {
 
                                 <DropdownMenuItem>
                                     <div onClick={openMyWorks} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
-                                        <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[30px]' />
+                                        <Image src="/projectsIcon.ico" alt='' width={20} height={20} className='w-[30px] select-none ' draggable={false} />
                                         <div>
                                             <Label className='text-[13px] leading-none font-normal'>My Work</Label>
                                         </div>
@@ -175,8 +175,8 @@ const startMenu = () => {
                         </div>
                     </div>
                     <div className='p-3 flex items-center gap-4 justify-end'>
-                        <button className='flex gap-1 items-center cursor-pointer bg-transparent hover:bg-black/10'><Image src="/logoffbtn.ico" alt='folder icon' width={20} height={20} className='w-[22px]' /><Label className='font-thin text-[13px] cursor-pointer'>Log Off</Label></button>
-                        <button className='flex gap-1 items-center cursor-pointer bg-transparent hover:bg-black/10'><Image src="/poweroffbtn.ico" alt='folder icon' width={20} height={20} className='w-[22px]' /><Label className='font-thin text-[13px] cursor-pointer'>Turn Off Computer</Label></button>
+                        <button className='flex gap-1 items-center cursor-pointer bg-transparent hover:bg-black/10'><Image src="/logoffbtn.ico" alt='folder icon' width={20} height={20} className='w-[22px] select-none ' draggable={false} /><Label className='font-thin text-[13px] cursor-pointer'>Log Off</Label></button>
+                        <button className='flex gap-1 items-center cursor-pointer bg-transparent hover:bg-black/10'><Image src="/poweroffbtn.ico" alt='folder icon' width={20} height={20} className='w-[22px] select-none ' draggable={false} /><Label className='font-thin text-[13px] cursor-pointer'>Turn Off Computer</Label></button>
                     </div>
                 </div>
             </DropdownMenuContent>

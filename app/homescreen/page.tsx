@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // start menu components
 import StartMenu from '@/components/homeScreen/startMenu/startMenu'
 
@@ -12,15 +12,13 @@ import { Label } from '@/components/ui/label'
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu"
 
 // icons
-import { FaRegWindowMaximize } from "react-icons/fa";
-import { FaWindowMinimize } from "react-icons/fa";
 import { useApplicationStore } from '@/stores/application'
-import { LiaTimesSolid } from "react-icons/lia";
+
 
 
 //resuable components
 import XPExplorerBar from '@/utils/XPExplorerBar';
-import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume } from '@/utils/OpenApplication'
+import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume, openAboutMe, openWindowsMediaPlayer } from '@/utils/OpenApplication'
 import { AppInHomePage } from '@/utils/AppInHomePage'
 
 
@@ -29,9 +27,9 @@ import SystemTray from '@/components/homeScreen/SystemTray/SystemTray'
 import { useSelectionContainer, boxesIntersect } from '@air/react-drag-to-select'
 
 
+import AccessDenied from '@/components/homeScreen/accessDenied/AccessDenied'
 
-
-
+import { AudioPlayer } from 'react-audio-play';
 
 const HomeScreen = () => {
 
@@ -63,6 +61,8 @@ const HomeScreen = () => {
         'my-works',
         'email',
         'resume',
+        'about-me',
+        'windows-media-player'
     ]
 
 
@@ -101,12 +101,18 @@ const HomeScreen = () => {
         },
     });
 
+    // const handlePlay = () => {
+    //     console.log('Audio started playing');
+    // };
 
+    // useEffect(() => {
+    //     handlePlay()
+    // }, [])
 
     return (
         <div className='h-screen'>
+            {/* <AudioPlayer src="/sounds/windows-xp-startup.mp3" onPlay={handlePlay} className='hidden'/> */}
 
-            {/* <audio src="/sounds/windows-xp-startup.mp3" className='hidden' autoPlay /> */}
             <ContextMenu>
                 <ContextMenuTrigger>
                     <div
@@ -155,7 +161,7 @@ const HomeScreen = () => {
                                         onClick={openQuickStart}
                                     />
                                 </div>
-                          
+
 
 
                                 {/* MY WORKS APP */}
@@ -232,6 +238,56 @@ const HomeScreen = () => {
                                         onClick={openResume}
                                     />
                                 </div>
+                                {/* ABOUT ME */}
+                                <div
+                                    id="item-about-me"
+                                    className={`group rounded desktop-item`}
+                                >
+                                    <AppInHomePage
+                                        icon={
+                                            <Image
+                                                src="/aboutmeIcon.ico"
+                                                alt=""
+                                                width={500}
+                                                height={500}
+                                                className={`w-[40px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]`}
+                                                draggable={false}
+                                            />
+                                        }
+                                        label={
+                                            <Label className={`${selected.includes('about-me') ? 'bg-[#0028F0]' : ''} group-focus:bg-[#0028F0] font-semibold break-words text-[13px] leading-tight text-center p-1 cursor-pointer [text-shadow:1px_1px_1px_black] [-webkit-text-stroke:0.2px_black]`}>
+                                                About Me
+                                            </Label>
+                                        }
+                                        onClick={openAboutMe}
+                                    />
+                                </div>
+
+
+                                {/* WINDOWS MEDIA PLAYER */}
+                                <div
+                                    id="item-windows-media-player"
+                                    className={`group rounded desktop-item`}
+                                >
+                                    <AppInHomePage
+                                        icon={
+                                            <Image
+                                                src="/windowsMediaPlayer/Windows Media Player 9.png"
+                                                alt=""
+                                                width={500}
+                                                height={500}
+                                                className={`w-[40px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]`}
+                                                draggable={false}
+                                            />
+                                        }
+                                        label={
+                                            <Label className={`${selected.includes('windows-media-player') ? 'bg-[#0028F0]' : ''} group-focus:bg-[#0028F0] font-semibold break-words text-[13px] leading-tight text-center p-1 cursor-pointer [text-shadow:1px_1px_1px_black] [-webkit-text-stroke:0.2px_black]`}>
+                                                Windows Media Player
+                                            </Label>
+                                        }
+                                        onClick={openWindowsMediaPlayer}
+                                    />
+                                </div>
 
 
 
@@ -251,10 +307,10 @@ const HomeScreen = () => {
                                     className={activeId === data.id ? `z-40 ${data.display ? 'opacity-100' : 'opacity-0'}` : `z-10 ${data.display ? 'opacity-100' : 'opacity-0'} h-full `}
                                     key={data.id}
                                     bounds="parent"
-                                    minWidth={450}
-                                    minHeight={500}
+                                    minWidth={data.title == 'windows media player' ? 350 : 450}
+                                    minHeight={data.title == 'windows media player' ? 350 : 500}
                                     position={{ x: data.fullScreen ? 0 : data.startX, y: data.fullScreen ? 0 : data.startY }}
-                                    size={{ height: data.fullScreen ? window.innerHeight : data.defaultHeight, width: data.fullScreen ? window.innerWidth : data.defaultWidth }}
+                                    size={{ height: data.fullScreen ? window.innerHeight - 28 : data.defaultHeight, width: data.fullScreen ? window.innerWidth : data.defaultWidth }}
                                     dragHandleClassName="drag-handle"
                                     enableResizing={{
                                         top: data.fullScreen ? false : true,
@@ -283,7 +339,7 @@ const HomeScreen = () => {
                                 >
 
 
-                                    <div className={`w-full h-full ${activeId === data.id ? 'bg-[#0f4fd6]' : 'bg-[#3d82f2]'} ${data.fullScreen ? '' : 'rounded-t-[7px]'} p-[2px] flex flex-col shadow-[inset_0_2px_5px_rgba(103,169,246,0.95),inset_0_-2px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] border border-[#023bb5] `}>
+                                    <div className={`w-full h-full ${activeId === data.id ? 'bg-[#0066FF]' : 'bg-[#3d82f2]'} ${data.fullScreen ? '' : 'rounded-t-[7px]'} p-[2px] flex flex-col window-app-bar border border-[#023bb5] `}>
                                         {/* Drag handle */}
                                         <div className=" w-full  cursor-move rounded-t-[5px] pb-1 px-1 flex justify-between items-center pt-1">
                                             <div onDoubleClick={() => {
@@ -327,7 +383,7 @@ const HomeScreen = () => {
                                         </div>
 
 
-                                        {data.title != 'Internet' && data.title != 'Resume' && data.title != 'E-Mail' && data.title != 'My Works' && <XPExplorerBar
+                                        {data.title != 'Internet' && data.title != 'Resume' && data.title != 'E-Mail' && data.title != 'My Works' && data.title != 'windows media player' && <XPExplorerBar
                                             title={data.title}
                                             icon={data.icon}
                                         />}
@@ -354,52 +410,7 @@ const HomeScreen = () => {
                                         height: 150,
                                     }}
                                 >
-                                    <div className={`w-full h-full ${activeId === data.id ? 'bg-[#0f4fd6]' : 'bg-[#3d82f2]'} rounded-t-[10px] p-[3px] flex flex-col shadow-[inset_0_2px_5px_rgba(103,169,246,0.95),inset_0_-2px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] border border-[#023bb5]`}>
-                                        {/* Drag handle */}
-                                        <div className=" w-full h-6 cursor-move rounded-t-[5px] pb-1 px-1 flex justify-between items-center pt-1">
-                                            <div className='flex items-center gap-1 w-full drag-handle'>
-                                                {/* <FaFolderOpen className='text-[#f5d78c] text-[15px]' /> */}
-                                                <div className='w-[20px] aspect-square'>
-                                                    <Image src="/Critical.png" alt='' width={20} height={20} className='w-full aspect-square select-none' />
-                                                </div>
-                                                <Label className='text-[12px]'>{'Local Disk (C:)'}</Label>
-                                            </div>
-                                            <div className={`${activeId === data.id ? 'opacity-100' : 'opacity-70'}  flex justify-end min-w-[80px] max-w-[80px] items-center gap-1 cursor-default pl-1`}>
-
-                                                <Image
-                                                    onClick={() => closeErrorWindowItem(data.id)}
-                                                    src={'/applicationController/Exit.png'}
-                                                    alt=''
-                                                    width={100}
-                                                    height={100}
-                                                    className='w-[20px] cursor-pointer hover:brightness-125'
-                                                />
-
-
-                                            </div>
-                                            {/* <div className={`${activeId === data.id ? 'opacity-100' : 'opacity-70'} flex items-center gap-1`}>
-                                                <button onClick={() => closeErrorWindowItem(data.id)} className='bg-red-400 p-[2px] rounded border border-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_3px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] hover:brightness-110 cursor-pointer'>
-                                                    <LiaTimesSolid className='text-[15px]' />
-                                                </button>
-                                            </div> */}
-
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="h-full flex flex-col bg-white text-black  ">
-                                            <audio src="/sounds/erro.mp3" className='hidden' autoPlay />
-                                            <div className='flex gap-3 text-black p-4'>
-                                                <div className='w-[30px] aspect-square'>
-                                                    <Image src="/Critical.png" alt='' width={20} height={20} className='w-full aspect-square select-none' />
-                                                </div>
-                                                <div>
-                                                    <Label className='text-[14px] font-normal'>{'C:/ Not accessible.'}</Label>
-                                                    <Label className='text-[14px] font-normal'>{'Access Denied'}</Label>
-                                                </div>
-                                            </div>
-                                            <button onClick={() => closeErrorWindowItem(data.id)} className="group relative text-[14px] inline-flex w-[100px] m-auto  items-center justify-center overflow-hidden  border border-black/60 bg-transparent  font-normal  transition-all duration-100 [box-shadow:2px_2px_rgb(82_82_82)] active:translate-x-[1px] active:translate-y-[1px] active:[box-shadow:0px_0px_rgb(82_82_82)]">Ok</button>
-                                        </div>
-                                    </div>
+                                    <AccessDenied id={data.id} />
                                 </Rnd>
                             ))
                         }
@@ -428,7 +439,7 @@ const HomeScreen = () => {
 
                 </ContextMenuContent>
             </ContextMenu>
-            <div data-disableselect="true" className='task-bar bg-[#2755EA] z-50 w-full h-87 max-h-7 fixed   bottom-0 gap-1 flex items-center '>
+            <div data-disableselect="true" className='task-bar bg-[#2755EA] z-50 w-full h-7 max-h-7 fixed   bottom-0 gap-1 flex items-center '>
                 <StartMenu />
 
                 <div className=' flex items-center h-full w-full py-[2px] overflow-hidden whitespace-nowrap box-border'>
@@ -466,7 +477,7 @@ const HomeScreen = () => {
                     ))}
                 </div>
 
-                <div className='sys-tray bg-[#1393e8] w-[130px] min-w-[130px] h-full border-l border-black/50 '>
+                <div className='sys-tray bg-[#1393e8] w-[135px] min-w-[135px] h-full border-l border-black/50 '>
                     <SystemTray />
                 </div>
             </div>

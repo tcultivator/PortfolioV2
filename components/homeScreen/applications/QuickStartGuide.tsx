@@ -15,7 +15,7 @@ import { Label } from '@/components/ui/label';
 import Projects from '../applications/projects';
 import Resume from './Resume';
 //resuable components
-import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume } from '@/utils/OpenApplication'
+import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume, openAboutMe } from '@/utils/OpenApplication'
 
 const QuickStartItem = ({ icon, label, onClick }: {
     icon: React.ReactNode;
@@ -77,18 +77,18 @@ const QuickStartGuide = () => {
                         onClick={openMyWorks}
                     />
 
-                    {/* Skills/TechStack */}
+                    {/* Skills/TechStack
                     <QuickStartItem
                         label="Tech Stacks"
                         icon={<Image src="/techstackIcon.ico" alt='' width={500} height={500} className='w-[40px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />}
                         onClick={openEmail}
-                    />
+                    /> */}
 
                     {/* About Me */}
                     <QuickStartItem
                         label="About Me"
                         icon={<Image src="/aboutmeIcon.ico" alt='' width={500} height={500} className='w-[40px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />}
-                        onClick={openEmail}
+                        onClick={openAboutMe}
                     />
 
                     {/* Contact */}

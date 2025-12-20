@@ -4,6 +4,15 @@ import { useEffect, useState } from 'react'
 import { Label } from '@/components/ui/label';
 import Image from 'next/image';
 import { LiaTimesSolid } from "react-icons/lia";
+import { useSystemTrayStore } from '@/stores/systemTrayStore';
+
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+
 
 function getFormattedTime() {
     const now = new Date();
@@ -14,6 +23,11 @@ function getFormattedTime() {
 const SystemTray = () => {
     const [time, setTime] = useState(getFormattedTime())
     const [tooltip, setTooltip] = useState(false)
+
+    const volumeStatus = useSystemTrayStore((state) => state.volumeStatus)
+    const setVolumeStatus = useSystemTrayStore((state) => state.setVolumeStatus)
+
+
     useEffect(() => {
         const id = setInterval(() => setTime(getFormattedTime()), 1000);
         return () => clearInterval(id);
@@ -24,7 +38,7 @@ const SystemTray = () => {
             setTooltip(true)
         }, 3000);
 
-        return ()=> clearTimeout(timeout)
+        return () => clearTimeout(timeout)
     }, [])
 
     useEffect(() => {
@@ -40,7 +54,15 @@ const SystemTray = () => {
 
             <div className='flex items-center gap-2'>
                 <div className='relative'>
-                    <Image onClick={() => setTooltip(true)} id='MWImage' src="/systemTrayIcons/popupHelp.ico" alt='' width={500} height={500} className='w-[15px] cursor-pointer  select-none  mt-[2px] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Image onClick={() => setTooltip(true)} id='MWImage' src="/systemTrayIcons/popupHelp.ico" alt='' width={500} height={500} className='w-[15px] cursor-pointer  select-none  mt-[2px] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Portfolio Info</p>
+                        </TooltipContent>
+                    </Tooltip>
+
                     <div className='custom-tooltip w-[230px] h-[80px] ' data-open={tooltip}>
                         <div className='flex flex-col gap-[3px] py-[3px] px-[6px] rounded-[7px] bg-white w-full h-full'>
                             <div className='flex items-center justify-between'>
@@ -56,9 +78,17 @@ const SystemTray = () => {
                         </div>
                     </div>
                 </div>
-                <Image id='MWImage' src="/systemTrayIcons/Volume.png" alt='' width={500} height={500} className='w-[15px]  select-none  mt-[2px] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Image onClick={setVolumeStatus} id='MWImage' src={`${volumeStatus ? '/systemTrayIcons/Volume.png' : '/systemTrayIcons/Mute.png'}`} alt='' width={500} height={500} className='w-[15px]  select-none  mt-[2px] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] cursor-pointer' draggable={false} />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>{volumeStatus ? 'Volume On' : ' Volume Off'}</p>
+                    </TooltipContent>
+                </Tooltip>
+
                 <Image id='MWImage' src="/systemTrayIcons/Security - Ok.png" alt='' width={500} height={500} className='w-[15px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
-                
+
             </div>
 
             <Label className='font-semibold break-words text-[10px] leading-tight  text-center  p-1 cursor-pointer [text-shadow:1px_1px_1px_black] [-webkit-text-stroke:0.1px_black]'>{time}</Label>

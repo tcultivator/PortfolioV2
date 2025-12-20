@@ -3,8 +3,10 @@ import Image from 'next/image'
 import { Label } from '@/components/ui/label'
 import { FaGithub } from 'react-icons/fa'
 import { IoMenu } from 'react-icons/io5'
-import { GoHomeFill } from 'react-icons/go'
-import { MdOutlineStar } from 'react-icons/md'
+import { GoHome } from "react-icons/go";
+
+import { IoIosStarOutline } from "react-icons/io";
+
 import IEBar from '@/utils/IEBar'
 import Home from './projectsComponents/home'
 import ProjectOverview from './projectsComponents/projectOverview'
@@ -44,7 +46,7 @@ const Projects = () => {
             className="
         @container flex flex-col
         w-full h-full min-h-0
-        bg-black text-black
+        bg-[#FFFFFF] text-black
         
         relative
       "
@@ -64,12 +66,12 @@ const Projects = () => {
                 }
             />
             {addressBarCurrent.label.includes('/MyWorks') ?
-                <div className="@container flex-1 min-h-0 relative overflow-hidden bg-black ">
+                <div className="@container flex-1 min-h-0 relative overflow-hidden  ">
                     {/* SLIDE MENU OVERLAY */}
                     {openMenu && (
                         <div className="absolute inset-0 z-50 bg-black/20">
                             <div
-                                className="bg-black h-full w-[200px] transition-transform duration-300"
+                                className="bg-white h-full w-[200px] transition-transform duration-300"
                                 style={{
                                     transform: openMenu
                                         ? 'translateX(0)'
@@ -80,7 +82,7 @@ const Projects = () => {
                                     <div className="flex items-center gap-5">
                                         <IoMenu
                                             onClick={() => setOpenMenu(false)}
-                                            className="text-white text-[20px] cursor-pointer"
+                                            className="text-black text-[20px] cursor-pointer"
                                         />
 
                                         <Label
@@ -92,24 +94,24 @@ const Projects = () => {
                                                 })
                                                 setOpenMenu(false)
                                             }}
-                                            className="flex items-center font-anton text-[17px] text-white cursor-pointer"
+                                            className="flex items-center font-anton text-[17px] text-black cursor-pointer "
                                         >
                                             <span className="mr-[-6px]">My</span>
-                                            <span className="bg-red-600 rounded-[10px] p-1">
+                                            <span className="bg-red-600 rounded-[10px] p-1 [text-shadow:1px_1px_1px_black] text-white [-webkit-text-stroke:0.1px_black]">
                                                 Works
                                             </span>
                                         </Label>
                                     </div>
 
-                                    <div className="flex flex-col gap-3 text-white">
+                                    <div className="flex flex-col gap-3 text-black">
                                         <div className="flex items-center gap-1 cursor-pointer">
-                                            <GoHomeFill />
-                                            <Label>Home</Label>
+                                            <GoHome className='text-[20px]' />
+                                            <Label className='font-normal text-[16px]'>Home</Label>
                                         </div>
 
                                         <div className="flex items-center gap-1 cursor-pointer">
-                                            <MdOutlineStar />
-                                            <Label>Featured Projects</Label>
+                                            <IoIosStarOutline className='text-[20px]' />
+                                            <Label className='font-normal text-[16px] '>Featured Projects</Label>
                                         </div>
                                     </div>
                                 </div>
@@ -120,11 +122,11 @@ const Projects = () => {
                     {/* SCROLLABLE CONTENT ONLY */}
                     <div ref={scrollRef} className="flex flex-col h-full overflow-auto">
                         {/* STICKY TOP BAR */}
-                        <div className="sticky top-0 z-40 flex items-center justify-between p-3 bg-black/20 backdrop-blur-md border-b border-white/20">
+                        <div className="sticky top-0 z-40 flex items-center justify-between p-3 bg-white/20 backdrop-blur-md border-b border-black/20">
                             <div className="flex items-center gap-5">
                                 <IoMenu
                                     onClick={() => setOpenMenu(true)}
-                                    className="text-white text-[20px] cursor-pointer block @2xl:hidden"
+                                    className="text-black text-[20px] cursor-pointer block @2xl:hidden"
                                 />
 
                                 <Label
@@ -135,10 +137,10 @@ const Projects = () => {
                                             label: '/MyWorks',
                                         })
                                     }}
-                                    className="flex items-center font-anton text-[17px] @2xl:px-5 text-white cursor-pointer"
+                                    className="flex items-center font-anton text-[17px] @2xl:px-5  cursor-pointer"
                                 >
-                                    <span className="mr-[-6px]">My</span>
-                                    <span className="bg-red-600 rounded-[10px] p-1">
+                                    <span className="mr-[-6px] text-black">My</span>
+                                    <span className="bg-red-600 rounded-[10px] text-white p-1 [text-shadow:1px_1px_1px_black] [-webkit-text-stroke:0.1px_black]">
                                         Works
                                     </span>
                                 </Label>
@@ -150,7 +152,7 @@ const Projects = () => {
                         {/* MAIN BODY */}
                         <div className="flex">
                             {/* DESKTOP SIDEBAR */}
-                            <div className="hidden @2xl:flex flex-col gap-3 w-[200px] p-5 text-white">
+                            <div className="hidden @2xl:flex flex-col gap-3 w-[200px] p-5 text-black">
                                 <div
                                     onClick={() => {
                                         setAddressbarHistory(addressBarCurrent)
@@ -161,13 +163,13 @@ const Projects = () => {
                                     }}
                                     className="flex items-center gap-1 cursor-pointer"
                                 >
-                                    <GoHomeFill />
-                                    <Label>Home</Label>
+                                    <GoHome className='text-[20px]' />
+                                    <Label className='font-normal text-[16px]'>Home</Label>
                                 </div>
 
                                 <div className="flex items-center gap-1">
-                                    <MdOutlineStar />
-                                    <Label>Featured Projects</Label>
+                                    <IoIosStarOutline className='text-[20px]' />
+                                    <Label className='font-normal text-[16px] '>Featured Projects</Label>
                                 </div>
                             </div>
 
@@ -200,7 +202,7 @@ const Projects = () => {
 
 
             {/* STATUS BAR */}
-            <div className="p-[2px] bg-[#edebd8] border-t border-white/30">
+            <div className="p-[2px] bg-[#edebd8] border-t border-black/30">
                 <Label className="text-[10px] text-black/80 px-2">
                     Select project for more details
                 </Label>

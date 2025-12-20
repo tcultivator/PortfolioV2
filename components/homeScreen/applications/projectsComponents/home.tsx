@@ -50,15 +50,15 @@ const home = () => {
     const setAddressBarCurrent = useAddressbarStore((state) => state.setAddressBarCurrent)
     const addressBarCurrent = useAddressbarStore((state) => state.addressBarCurrent)
     return (
-        <div className=" w-full box-border h-full text-white p-5">
-            <div className="grid gap-4 grid-cols-1 @2xl:grid-cols-2 @4xl:grid-cols-3 ">
+        <div className=" w-full box-border h-full text-black p-5">
+            <div className="grid gap-2 grid-cols-1 @2xl:grid-cols-2 @4xl:grid-cols-3 ">
                 {projectsSelection.map((data, index) => (
                     <div onClick={() => {
                         setAddressbarHistory(addressBarCurrent)
                         setAddressBarCurrent({ index: index, label: `/MyWorks/${data.label}` })
-                    }} key={index} className="group cursor-pointer flex flex-col gap-2 py-5">
+                    }} key={index} className="group cursor-pointer flex hover:bg-black/10 flex-col gap-2 p-2 rounded-[16px]">
 
-                        <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-neutral-800">
+                        <div className="relative w-full aspect-video rounded-[10px] overflow-hidden border border-black/10">
                             <Image
                                 src={data.image}
                                 alt=""
@@ -69,12 +69,12 @@ const home = () => {
 
 
                         <div className="flex items-start gap-1">
-                            <FaGithub className='text-white text-[30px]' />
+                            <FaGithub className='text-black text-[30px]' />
                             <div>
-                                <p className="text-sm font-medium line-clamp-2">
+                                <p className="text-sm text-black font-medium line-clamp-2">
                                     {data.label}
                                 </p>
-                                <p className="text-xs text-white/60">
+                                <p className="text-xs text-black/60">
                                     {"tcultivator"} • {"2025"}
                                 </p>
                             </div>

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { QuickStartGuideData } from '@/utils/defaultAppData'
 
 //reusable function that opens application
-import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume } from '@/utils/OpenApplication'
+import { openInternetExplorer, openQuickStart, openMyWorks, openEmail, openResume, openAboutMe, openWindowsMediaPlayer } from '@/utils/OpenApplication'
 
 
 type WindowItemType = {
@@ -65,6 +65,26 @@ export const useApplicationStore = create<Applications>((set) => ({
 
     }],
     addWindowItem: (title, icon, content, defaultWidth, defaultHeight) => {
+
+        // if the my works app is already open, it doenst open new my works app, it just set it to active windows so it go at front of other application open
+        if (title == 'My Works') {
+            const isMyWorkAlreadyOpen = useApplicationStore.getState().windowItem.filter(item => item.title == 'My Works')
+            if (isMyWorkAlreadyOpen.length > 0) {
+                useApplicationStore.getState().setActiveId(isMyWorkAlreadyOpen[0].id)
+                return
+            }
+        }
+        if (title == 'windows media player') {
+            const isWindowsMediaPlayerAlreadyOpen = useApplicationStore.getState().windowItem.filter(item => item.title == 'windows media player')
+            if (isWindowsMediaPlayerAlreadyOpen.length > 0) {
+                useApplicationStore.getState().setActiveId(isWindowsMediaPlayerAlreadyOpen[0].id)
+                return
+            }
+        }
+
+
+        // if my works is not open, it just open it
+
         // Calculate perfect center
         let startX = window.innerWidth / 2 - defaultWidth / 2;
         let startY = window.innerHeight / 2 - defaultHeight / 2;
@@ -97,6 +117,8 @@ export const useApplicationStore = create<Applications>((set) => ({
             ],
             activeId: id
         }));
+
+
     },
 
 
@@ -228,6 +250,25 @@ export const useApplicationStore = create<Applications>((set) => ({
     },
 
     {
+        applicationIcon: '/pdfIcon.webp',
+        applicationName: 'Resume',
+        applicationSubName: '',
+        applicationOpenFunction: openResume
+    },
+    {
+        applicationIcon: '/aboutmeIcon.ico',
+        applicationName: 'About Me',
+        applicationSubName: '',
+        applicationOpenFunction: openAboutMe
+    },
+
+    {
+        applicationIcon: '/windowsMediaPlayer/Windows Media Player 9.png',
+        applicationName: 'Windows Media Player',
+        applicationSubName: '',
+        applicationOpenFunction: openWindowsMediaPlayer
+    },
+    {
         applicationIcon: '/gihubIcon.png',
         applicationName: 'Github',
         applicationSubName: '',
@@ -239,13 +280,6 @@ export const useApplicationStore = create<Applications>((set) => ({
         applicationName: 'Linkedin',
         applicationSubName: '',
         applicationOpenFunction: openMyWorks
-    },
-
-    {
-        applicationIcon: '/pdfIcon.webp',
-        applicationName: 'Resume',
-        applicationSubName: '',
-        applicationOpenFunction: openResume
     },
 
     ],

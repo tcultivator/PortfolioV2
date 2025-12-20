@@ -59,7 +59,7 @@ const startMenu = () => {
 
                                 </div>
                                 {
-                                    applicationData.slice(2).map((data, index) => (
+                                    applicationData.slice(2,7).map((data, index) => (
                                         <div key={index}>
                                             <DropdownMenuItem>
                                                 <div onClick={data.applicationOpenFunction} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>

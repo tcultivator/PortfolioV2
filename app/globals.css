@@ -254,11 +254,99 @@ button#p1:focus #p1label {
     inset 0px 10px 10px 0px #1e43bb;
 }
 
+.window-app-bar {
+  box-shadow: inset 0px 4px 4px 0px #70c6ff,
+    inset 0px 8px 10px 0px #0B51E8,
+    inset 0px 10px 10px 0px #0B51E8;
+}
+
+.windows-media-player-bar {
+  box-shadow: inset 0px 4px 4px 0px #b2e0ff,
+    inset 0px 8px 10px 0px #5662AF,
+    inset 0px 10px 10px 0px #5662AF;
+}
+
+.windows-media-player-Button {
+  box-shadow: inset 0px 4px 4px 0px #ffffff,
+    inset 0px 8px 10px 0px #c6ccf3,
+    inset 0px 10px 10px 0px #b1bbfc;
+  border-top: 1px solid #323c7e;
+  border-left: 1px solid #323c7e;
+  border-right: 1px solid #323c7e;
+  border-bottom: 2px solid #323c7e;
+}
+
+.windows-media-player-Button1 {
+  box-shadow: 0px 3px 2px 0px #b1bbfc, 0px 3px 2px 0px #b1bbfc, 0px 3px 2px 0px #b1bbfc;
+  border-top: 1px solid #323c7e;
+  border-left: 1px solid #323c7e;
+  border-right: 1px solid #323c7e;
+  border-bottom: 2px solid #323c7e;
+}
+
 .sys-tray {
   box-shadow: inset 0px 4px 4px 0px #70c6ff,
     inset 0px 8px 10px 0px #0d81ce,
     inset 0px 10px 10px 0px #0a73b9;
 }
+
+
+
+
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+}
+
+/* Progress slider */
+.progress-slider::-webkit-slider-runnable-track {
+  height: 6px;
+
+  border-radius: 3px;
+  box-shadow:
+    inset 2px 2px 5px #4f73c8,
+    /* dark inset shadow */
+    inset -2px -2px 5px rgb(255, 255, 255);
+}
+
+
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 17px;
+  background: #45b12f;
+  box-shadow: inset 0px 3px 0px #45b12f, inset 0px 13px 0px rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: -5px;
+  /* align with track */
+}
+
+
+
+
+/* Volume slider */
+.volume-slider::-webkit-slider-runnable-track {
+  height: 4px;
+
+  border-radius: 2px;
+  box-shadow:
+    inset 2px 2px 5px #4f73c8,
+    /* dark inset shadow */
+    inset -2px -2px 5px rgb(255, 255, 255);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 17px;
+  background: #45b12f;
+  box-shadow: inset 0px 3px 0px #45b12f, inset 0px 13px 0px rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+
 
 
 

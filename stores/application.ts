@@ -268,20 +268,7 @@ export const useApplicationStore = create<Applications>((set) => ({
         applicationSubName: '',
         applicationOpenFunction: openWindowsMediaPlayer
     },
-    {
-        applicationIcon: '/gihubIcon.png',
-        applicationName: 'Github',
-        applicationSubName: '',
-        applicationOpenFunction: openMyWorks
-    },
-
-    {
-        applicationIcon: '/linkedinIcon.png',
-        applicationName: 'Linkedin',
-        applicationSubName: '',
-        applicationOpenFunction: openMyWorks
-    },
-
+   
     ],
 
 
@@ -339,3 +326,5 @@ export const useApplicationStore = create<Applications>((set) => ({
     ]
 
 }))
+
+

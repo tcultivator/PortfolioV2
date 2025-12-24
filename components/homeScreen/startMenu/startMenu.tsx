@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-
+import Link from 'next/link';
 
 
 //shadcn components
@@ -59,7 +59,7 @@ const startMenu = () => {
 
                                 </div>
                                 {
-                                    applicationData.slice(2,7).map((data, index) => (
+                                    applicationData.slice(2, 7).map((data, index) => (
                                         <div key={index}>
                                             <DropdownMenuItem>
                                                 <div onClick={data.applicationOpenFunction} className='flex items-center gap-1 p-1 text-black  hover:bg-[#346eed] hover:text-white cursor-pointer'>
@@ -100,6 +100,20 @@ const startMenu = () => {
                                                             </div>
                                                         ))
                                                     }
+                                                    <Link href={"https://github.com/tcultivator"} target='_blank' className='flex items-center gap-1 p-1  hover:bg-[#346eed] hover:text-white cursor-pointer'>
+                                                        <Image src="/gihubIcon.png" alt='' width={20} height={20} className='w-[18px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
+                                                        <div>
+                                                            <Label className='text-[12px] leading-none font-normal'>Github</Label>
+                                                        </div>
+                                                    </Link>
+
+                                                    <Link href={"https://www.linkedin.com/in/luigie-panahon-541733367/"} target='_blank' className='flex items-center gap-1 p-1  hover:bg-[#346eed] hover:text-white cursor-pointer'>
+                                                        <Image src="/linkedinIcon.png" alt='' width={20} height={20} className='w-[18px] select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />
+                                                        <div>
+                                                            <Label className='text-[12px] leading-none font-normal'>Linkedin</Label>
+                                                        </div>
+                                                    </Link>
+
 
                                                 </div>
                                             </NavigationMenuContent>

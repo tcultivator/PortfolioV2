@@ -1,7 +1,6 @@
 //zustand store
 import { useApplicationStore } from '@/stores/application';
 
-
 import Image from 'next/image';
 
 
@@ -41,3 +40,5 @@ export function openAboutMe() {
 export function openWindowsMediaPlayer() {
     useApplicationStore.getState().addWindowItem('windows media player', <Image src="/windowsMediaPlayer/Windows Media Player 9.png" alt='' width={500} height={500} className='w-full aspect-square select-none drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black] drop-shadow-[0_0_.5px_black]' draggable={false} />, <WindowsMediaPlayer />, 350, 350)
 }
+
+

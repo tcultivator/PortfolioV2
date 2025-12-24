@@ -48,14 +48,14 @@ const QuickStartGuide = () => {
                             <Image src="/internetIcon.ico" alt='' width={500} height={500} className='w-[16px] select-none ' draggable={false} />
                             <Label onClick={() => openInternetExplorer('https://www.google.com/')} className='text-[10px] font-medium text-[#0f4fd6] hover:underline select-none cursor-pointer' draggable={false}>Internet Explorer</Label>
                         </div>
-                        <div className='flex items-center gap-1'>
+                        <Link href={"https://github.com/tcultivator"} target='_blank' className='flex items-center gap-1'>
                             <FaGithub className='text-black text-[16px]' />
                             <Label className='text-[10px] font-medium text-[#0f4fd6] hover:underline select-none cursor-pointer' draggable={false} >Github</Label>
-                        </div>
-                        <div className='flex items-center gap-1'>
+                        </Link>
+                        <Link href={"https://www.linkedin.com/in/luigie-panahon-541733367/"} target='_blank' className='flex items-center gap-1'>
                             <GrLinkedin className='text-[#3397e8] text-[16px]' />
                             <Label className='text-[10px] font-medium text-[#0f4fd6] hover:underline select-none cursor-pointer' draggable={false} >Linkedin</Label>
-                        </div>
+                        </Link>
                     </div>
                 </div>
 

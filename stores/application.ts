@@ -76,7 +76,7 @@ export const useApplicationStore = create<Applications>((set) => ({
         }
 
 
-        // if my works is not open, it just open it
+        
 
         // Calculate perfect center
         let startX = window.innerWidth / 2 - defaultWidth / 2;

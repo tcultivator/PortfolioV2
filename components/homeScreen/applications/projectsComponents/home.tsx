@@ -3,10 +3,15 @@ import React from 'react'
 import Image from 'next/image'
 import { useAddressbarStore } from '@/stores/addressBarStore';
 import { FaGithub } from "react-icons/fa";
+
+// videos
+import overClockedClient from '@/videos/OverClockedX-Client-Final.mp4'
+import overclockedxadmin from '@/videos/overclockedx-admin.mp4'
 export const projectsSelection = [
     {
 
         image: '/myWorks/overclockedx-client.png',
+        video: overClockedClient,
         label: 'OverClockedX-Client',
         link: 'https://overclockedx-client.vercel.app/',
         description: 'OverclockedX is an e-commerce website where you can purchase computers, laptops, computer parts, peripherals, and much more. It features an AI assistant that helps you check compatibility and provides relevan information to ensure you make informed decisions. With its responsive design and clean, user-friendly interface, OverClockedX offers an easy and seamless browseing experience across all device'
@@ -15,6 +20,7 @@ export const projectsSelection = [
     {
 
         image: '/myWorks/overclockedx-admin.png',
+        video: overclockedxadmin,
         label: 'OverClockedX-Admin',
         link: 'https://overclockedx-admin.vercel.app/',
         description: 'OverClockedX Admin is the official administrative dashboard for the OverClockedX e-commerce platform. It allows administrators to efficiently manage the client-facing store by handling inventory, orders, promotions, analytics, and more through a modern, responsive interface.'
@@ -22,6 +28,7 @@ export const projectsSelection = [
     {
 
         image: '/myWorks/instagram-clone.webp',
+        video: overClockedClient,
         label: 'InstaGang',
         link: 'https://tcultivator.github.io/instagramClone-DevelopmentPhaseV2/',
         description: `
@@ -31,6 +38,7 @@ The platform also supports real-time updates, notifications, and a personalized 
     {
 
         image: '/myWorks/portfolio-v1.webp',
+        video: overClockedClient,
         label: 'Portfolio v1',
         link: 'https://tcultivator.github.io/myPortfolio/',
         description: `Custom Design Portfolio
@@ -39,6 +47,7 @@ This portfolio showcases a fully custom design created from scratch to highlight
     {
 
         image: '/myWorks/portfolio-v1.webp',
+        video: overClockedClient,
         label: 'Portfolio Inspired WindowsXp',
         link: 'https://tcultivator.github.io/myPortfolio/',
         description: `Windows XP-Inspired Portfolio

@@ -222,7 +222,7 @@ const HomeScreen = () => {
                             {
                                 refresh &&
 
-                                <div className='p-1 h-[80dvh] md:h-[90dvh]  w-max grid grid-cols-2 grid-rows-5 md:grid-rows-7 grid-flow-col gap-5 items-start justify-start md:px-3 md:py-10 py-5'>
+                                <div className='p-1 h-[80dvh] md:h-[100dvh]  w-max grid grid-cols-2 grid-rows-5 md:grid-rows-7 grid-flow-col gap-5 items-start justify-start md:px-3 py-5'>
 
                                     {/* QUICK START GUIDE APP */}
                                     <div

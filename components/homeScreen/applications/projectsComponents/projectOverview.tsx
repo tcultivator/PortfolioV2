@@ -4,39 +4,30 @@ import { projectsSelection } from './home'
 import { useAddressbarStore } from '@/stores/addressBarStore';
 import { Label } from '@/components/ui/label';
 import { FaGithub } from "react-icons/fa";
-import { FaPlay } from "react-icons/fa";
-import { openInternetExplorer } from '@/utils/OpenApplication';
+
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import Video from 'next-video'
+
 const ProjectOverview = () => {
     const addressBarCurrent = useAddressbarStore((state) => state.addressBarCurrent)
     const setAddressbarHistory = useAddressbarStore((state) => state.setAddressbarHistory)
     const setAddressBarCurrent = useAddressbarStore((state) => state.setAddressBarCurrent)
+
+
     return (
         <div className="@container w-full h-full box-border text-black p-2">
             <div className="flex flex-col @2xl:flex-row gap-6 justify-start h-full">
 
-               
+
                 <div className="flex-1 flex flex-col gap-4">
 
                     {/* video */}
-                    <div className="relative w-full aspect-video border border-black/10 rounded-xl overflow-hidden shadow-2xl shadow-white/10">
-                        <Image
-                            src={projectsSelection[Number(addressBarCurrent.index)].image}
-                            alt=""
-                            fill
-                            className="object-cover"
-                        />
-
-                        {/* play button */}
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                            <div className="w-16 h-16 rounded-full bg-black/60 flex items-center justify-center cursor-pointer">
-                                <FaPlay className='text-[20px] text-white/80 ml-1' />
-                            </div>
-                        </div>
+                    <div className="relative w-full aspect-video border border-black/10 rounded @2xl:rounded-xl overflow-hidden shadow-2xl shadow-white/10">
+                        <Video src={projectsSelection[Number(addressBarCurrent.index)].video}></Video>
                     </div>
                     <div className='flex flex-col gap-1 '>
-                        
+
                         <Label className="text-lg font-normal font-orbitron leading-tight">
                             {projectsSelection[Number(addressBarCurrent.index)].label}
                         </Label>

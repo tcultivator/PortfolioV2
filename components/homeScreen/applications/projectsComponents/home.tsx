@@ -166,21 +166,24 @@ const home = () => {
 
 
     return (
-        <div className=" w-full box-border h-full text-black p-1">
-            <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-                <div className="flex-1 gap-3 overflow-x-auto px-4 py-2 no-scrollbar w-full">
+        <div className=" w-full box-border h-full text-white p-1">
+            <div className="sticky top-0 z-30 w-full  mb-4">
+                <div className="flex w-full overflow-x-auto gap-1 @xl:gap-3 @xl:px-2 py-2 whitespace-nowrap no-scrollbar">
                     {['All', 'React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind', 'Node.js', 'CSS', 'Html', 'MySQL'].map((pill, i) => (
                         <button
                             key={i}
                             onClick={() => setSelectedCategory(pill)}
-                            className={`cursor-pointer flex-shrink-0 px-3 py-1.5 mr-2 mt-1 rounded-lg text-sm font-medium transition-colors ${pill === selectedCategory ? 'bg-black text-white' : 'bg-gray-100 text-black hover:bg-gray-200'}`}
+                            className={`cursor-pointer flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${pill === selectedCategory
+                                ? 'bg-gray-100 text-black'
+                                : 'bg-[#262626] text-white hover:bg-[#333333] '
+                                }`}
                         >
                             {pill}
                         </button>
                     ))}
                 </div>
             </div>
-            <div className="grid gap-2 grid-cols-1 @xl:grid-cols-2 @2xl:grid-cols-2 @4xl:grid-cols-4 ">
+            <div className="grid gap-4 @xl:gap-0  grid-cols-1 @xl:grid-cols-2 @2xl:grid-cols-2 @4xl:grid-cols-4 ">
                 {filteredProjects.map((data, index) => (
                     <div onClick={() => {
                         if (featuredProjectsOn) {
@@ -194,9 +197,9 @@ const home = () => {
                             setAddressBarCurrent({ index: index, label: `/MyWorks/${data.label}` })
                         }
 
-                    }} key={index} className={`group cursor-pointer flex hover:bg-black/10 flex-col gap-2 p-1 rounded-[16px] ${featuredProjectsOn && `${data.featuredProjects ? 'opacity-100' : 'opacity-40'}`}`}>
+                    }} key={index} className={`group cursor-pointer flex active:bg-[#262626] hover:bg-[#262626] flex-col gap-2 @xl:p-2 rounded @xl:ounded-[16px] ${featuredProjectsOn && `${data.featuredProjects ? 'opacity-100' : 'opacity-40'}`}`}>
 
-                        <div className={`relative w-full aspect-video rounded-[10px] overflow-hidden border border-black/10  `}>
+                        <div className={`relative w-full aspect-video rounded-[2px] @xl:rounded-[10px] overflow-hidden border border-black/10  `}>
                             <Image
                                 src={data.image}
                                 alt={data.label}
@@ -204,7 +207,7 @@ const home = () => {
                                 className="object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
                             />
                             {/* Duration Badge */}
-                            <div className="absolute bottom-1.5 right-1.5 bg-black/80 text-white text-xs font-medium px-1.5 py-0.5 rounded-[4px]">
+                            <div className="absolute bottom-1.5 right-1.5 bg-black/80  text-white text-xs font-medium px-1.5 py-0.5 rounded-[4px]">
                                 {data.duration}
                             </div>
                         </div>
@@ -212,21 +215,21 @@ const home = () => {
 
                         <div className="flex items-start gap-1">
                             <div className="flex-shrink-0 mt-0.5">
-                                <div className="w-9 h-9 rounded-full bg-black/5 flex items-center justify-center overflow-hidden border border-black/5">
-                                    <FaGithub className='text-black text-[20px]' />
+                                <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center overflow-hidden border border-black/5">
+                                    <FaGithub className='text-gray-100 text-[20px]' />
                                 </div>
                             </div>
 
                             {/* Text Content */}
                             <div className="flex flex-col flex-grow min-w-0">
                                 {/* Title */}
-                                <h3 className="text-[#0f0f0f] text-base font-medium font-sans line-clamp-2 leading-tight mb-1 group-hover:text-black">
+                                <h3 className="text-gray-100 text-base font-medium font-sans line-clamp-2 leading-tight ">
                                     {data.label}
                                 </h3>
 
                                 {/* Channel Name & Metadata */}
-                                <div className="text-[#606060] text-sm flex flex-col">
-                                    <div className="flex items-center hover:text-[#0f0f0f] transition-colors">
+                                <div className="text-[#a1a1a1] text-xs flex flex-col">
+                                    <div className="flex items-center transition-colors">
                                         <span className="truncate">tcultivator</span>
                                         {/* Verified Check */}
                                         <svg className="w-3 h-3 ml-1 fill-current opacity-60 flex-shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM9.8 17.3l-4.2-4.1L7 11.8l2.8 2.7L17 7.4l1.4 1.4-8.6 8.5z" /></svg>
@@ -240,8 +243,8 @@ const home = () => {
                             </div>
 
                             {/* Options Menu Icon */}
-                            <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 pt-1">
-                                <BsThreeDotsVertical className="text-[#0f0f0f] text-lg" />
+                            <div className="opacity-100 transition-opacity flex-shrink-0 pt-1">
+                                <BsThreeDotsVertical className="text-gray-100 text-lg" />
                             </div>
                         </div>
                     </div>

@@ -53,5 +53,20 @@ The design uniquely showcases my projects and skills, offering visitors a fun an
 
 ## 📸 Screenshots
 
-![Desktop View](/public/myWorks/windowsxp.png)  
-*Full Windows XP-inspired desktop with start menu and projects application*
+![Desktop View](/public/myWorks/windowsxp/windowsxploading.png)  
+*Windows Xp Loading Screen*
+
+![Desktop View](/public/myWorks/windowsxp/windowsxpSignin.png)  
+*Windows Xp Signin Screen*
+
+![Desktop View](/public/myWorks/windowsxp/windowsxp.png)  
+*start menu and projects preview application*
+
+![Desktop View](/public/myWorks/windowsxp/windowsxpMultipleWindow.png)  
+*Windows Xp Multiple open applications*
+
+![Desktop View](/public/myWorks/windowsxp/windowsxpProjectPreview.png)  
+*Windows Xp Mini Demo of Project inside of Windows Xp*
+
+![Desktop View](/public/myWorks/windowsxp/windowsxpPowerModal.png)  
+*Windows Xp Power Off Modal*

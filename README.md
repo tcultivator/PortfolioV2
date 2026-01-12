@@ -53,5 +53,5 @@ The design uniquely showcases my projects and skills, offering visitors a fun an
 
 ## 📸 Screenshots
 
-![Desktop View](/myWorks/windowsxp.png)  
-*Full Windows XP-inspired desktop with multiple apps open*
+![Desktop View](/public/myWorks/windowsxp.png)  
+*Full Windows XP-inspired desktop with start menu and projects application*
